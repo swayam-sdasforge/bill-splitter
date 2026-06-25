@@ -23,6 +23,7 @@ export default function DashboardOverview() {
   const [totalSpent, setTotalSpent] = useState(0);
   const [youOwe, setYouOwe] = useState(0);
   const [owedToYou, setOwedToYou] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [claimCode, setClaimCode] = useState('');
   const [activeGroupsCount, setActiveGroupsCount] = useState(0);
   const [voyageDiffText, setVoyageDiffText] = useState('no previous journey');
@@ -511,8 +512,14 @@ export default function DashboardOverview() {
   return (
     <div className="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row selection:bg-secondary-container selection:text-on-secondary-container">
       {/* TopAppBar (Mobile Only - Hidden on Desktop) */}
-      <header className="flex justify-between items-center px-gutter w-full sticky top-0 z-50 overflow-hidden border-b-2 border-outline-variant bg-background dark:bg-surface-dim h-20 md:hidden">
+      <header className="flex justify-between items-center px-gutter w-full sticky top-0 z-30 overflow-hidden border-b-2 border-outline-variant bg-background dark:bg-surface-dim h-20 md:hidden">
         <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="p-2 -ml-2 text-primary hover:text-secondary transition-all"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
           <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-2xl border border-outline-variant shadow-inner">
             {userAvatar}
           </div>
@@ -528,11 +535,32 @@ export default function DashboardOverview() {
         </div>
       </header>
 
-      {/* SideNavBar (Desktop Only) */}
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm animate-in fade-in"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* SideNavBar */}
       <nav 
-        className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-72 border-r-2 border-double border-outline-variant bg-surface-container bg-cover bg-center shadow-[4px_0_15px_-3px_rgba(88,28,135,0.08)]"
+        className={`${isMobileMenuOpen ? 'flex animate-in slide-in-from-left duration-300 shadow-2xl' : 'hidden md:flex shadow-[4px_0_15px_-3px_rgba(88,28,135,0.08)]'} flex-col h-screen fixed left-0 top-0 z-50 md:z-40 w-72 border-r-2 border-double border-outline-variant bg-surface-container bg-cover bg-center`}
         style={{ backgroundImage: "linear-gradient(rgba(26, 24, 32, 0.85), rgba(26, 24, 32, 0.85)), url('/retro_castle_bg.png')" }}
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest('a') && window.innerWidth < 768) {
+            setIsMobileMenuOpen(false);
+          }
+        }}
       >
+        {isMobileMenuOpen && (
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="md:hidden absolute top-4 right-4 text-on-surface-variant hover:text-primary z-50 bg-black/20 p-1 rounded-full border border-outline-variant/30 backdrop-blur"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        )}
         <div className="p-container-margin border-b border-outline-variant border-dashed flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-3xl border border-outline-variant shadow-inner flex-shrink-0">
             {userAvatar}
