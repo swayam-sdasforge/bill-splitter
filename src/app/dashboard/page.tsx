@@ -24,6 +24,7 @@ export default function DashboardOverview() {
   const [youOwe, setYouOwe] = useState(0);
   const [owedToYou, setOwedToYou] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLogoTooltipOpen, setIsLogoTooltipOpen] = useState(false);
   const [claimCode, setClaimCode] = useState('');
   const [activeGroupsCount, setActiveGroupsCount] = useState(0);
   const [voyageDiffText, setVoyageDiffText] = useState('no previous journey');
@@ -993,11 +994,11 @@ export default function DashboardOverview() {
 
         {/* Footer */}
         <footer className="bg-surface-container-highest dark:bg-inverse-surface border-t-4 border-double border-outline-variant w-full py-unit-8 flex flex-col md:flex-row justify-between items-center px-container-margin py-section-gap mt-auto z-10 relative">
-          <div className="group relative font-title-md text-title-md mb-4 md:mb-0 cursor-help inline-block">
+          <div className="group relative font-title-md text-title-md mb-4 md:mb-0 cursor-help inline-block" onClick={() => setIsLogoTooltipOpen(!isLogoTooltipOpen)}>
             <span className="text-white font-extrabold animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">The Swayam Splitter</span>
             
             {/* Pop-up Tooltip */}
-            <div className="absolute bottom-full left-0 mb-4 w-80 p-5 bg-surface text-on-surface rounded-xl border-4 border-double border-outline-variant shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform group-hover:-translate-y-2">
+            <div className={`absolute bottom-full left-0 mb-4 w-80 p-5 bg-surface text-on-surface rounded-xl border-4 border-double border-outline-variant shadow-2xl transition-all duration-300 z-50 transform group-hover:-translate-y-2 ${isLogoTooltipOpen ? 'opacity-100 visible -translate-y-2' : 'opacity-0 invisible group-hover:opacity-100 group-hover:visible'}`}>
               <h4 className="font-display text-lg font-bold text-primary mb-2 flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary">sailing</span>
                 What is this vessel?
