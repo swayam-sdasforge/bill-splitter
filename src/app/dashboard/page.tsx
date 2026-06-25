@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 
 export default function DashboardOverview() {
   const router = useRouter();
@@ -538,9 +539,11 @@ export default function DashboardOverview() {
           </div>
           <div className="min-w-0">
             <h1 className="font-headline-lg text-headline-lg font-bold text-primary">Welcome Aboard,</h1>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-1 truncate" title={userName || userEmail || 'Stateroom 402B'}>
-              {userName || userEmail || 'Stateroom 402B'}
-            </p>
+            <BottomSheetTooltip text={userName || userEmail || 'Stateroom 402B'}>
+              <p className="font-body-md text-body-md text-on-surface-variant mt-1 truncate">
+                {userName || userEmail || 'Stateroom 402B'}
+              </p>
+            </BottomSheetTooltip>
           </div>
         </div>
         <div className="flex-1 overflow-y-auto py-unit-8 flex flex-col gap-2 px-unit">
@@ -801,7 +804,6 @@ export default function DashboardOverview() {
                       accept="image/*"
                       onChange={handleQrCodeChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      title="Upload QR Code Image"
                     />
                     <button type="button" className="bg-surface-container-high text-on-surface border border-outline-variant px-4 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-surface-container-highest transition-colors w-full whitespace-nowrap">
                       <span className="material-symbols-outlined text-[20px]">qr_code</span>

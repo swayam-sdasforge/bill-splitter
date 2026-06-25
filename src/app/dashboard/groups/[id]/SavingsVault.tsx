@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 
 type Saving = {
   id: string;
@@ -139,9 +140,11 @@ export default function SavingsVault({ groupId, userId, isCaptain, savingsGoal, 
               ) : (
                 <div className="flex -space-x-2">
                   {savings.slice(0, 5).map((s, i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-primary-container border-2 border-surface flex items-center justify-center text-xs font-bold text-white shadow-sm" title={`${s.users?.name}: ₹${s.amount}`}>
-                      {s.users?.name?.charAt(0).toUpperCase() || 'P'}
-                    </div>
+                    <BottomSheetTooltip key={i} text={`${s.users?.name}: ₹${s.amount}`}>
+                      <div className="w-8 h-8 rounded-full bg-primary-container border-2 border-surface flex items-center justify-center text-xs font-bold text-white shadow-sm">
+                        {s.users?.name?.charAt(0).toUpperCase() || 'P'}
+                      </div>
+                    </BottomSheetTooltip>
                   ))}
                   {savings.length > 5 && (
                     <div className="w-8 h-8 rounded-full bg-surface-container-high border-2 border-surface flex items-center justify-center text-[10px] font-bold text-on-surface-variant shadow-sm">

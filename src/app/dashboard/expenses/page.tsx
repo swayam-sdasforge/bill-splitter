@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 import Link from 'next/link';
 
 type Expense = {
@@ -714,14 +715,15 @@ export default function ExpensesPage() {
                         Recorded
                       </span>
                     </div>
-                    <button 
-                      onClick={() => handleDelete(expense)}
-                      className={`transition-opacity p-2 rounded-full ${expense.isPersonal ? 'text-error opacity-0 group-hover:opacity-100 hover:bg-error/10' : 'text-on-surface-variant/30 cursor-not-allowed opacity-50'}`}
-                      title={expense.isPersonal ? "Delete expense" : "Voyage expenses cannot be deleted here"}
-                      disabled={!expense.isPersonal}
-                    >
-                      <span className="material-symbols-outlined text-[20px]">delete</span>
-                    </button>
+                    <BottomSheetTooltip text={expense.isPersonal ? "Delete expense" : "Voyage expenses cannot be deleted here"}>
+                      <button 
+                        onClick={() => handleDelete(expense)}
+                        className={`transition-opacity p-2 rounded-full ${expense.isPersonal ? 'text-error opacity-0 group-hover:opacity-100 hover:bg-error/10' : 'text-on-surface-variant/30 cursor-not-allowed opacity-50'}`}
+                        disabled={!expense.isPersonal}
+                      >
+                        <span className="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </BottomSheetTooltip>
                   </div>
                 </div>
               ))

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import Link from 'next/link';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 import { useRouter } from 'next/navigation';
 
 export default function ScannerPage() {
@@ -253,29 +254,38 @@ export default function ScannerPage() {
             </label>
 
             {image && (
-              <button
-                onClick={handleScan}
-                disabled={loading || !userApiKey}
-                title={!userApiKey ? "Please enter your API Key in settings first" : ""}
-                className="mt-6 w-full bg-secondary text-white font-bold uppercase tracking-wider py-4 rounded-xl shadow-md hover:bg-primary-container hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none flex items-center justify-center gap-2 group"
-              >
-                {loading ? (
-                  <>
-                    <span className="material-symbols-outlined animate-spin">sync</span>
-                    Deciphering Ink...
-                  </>
-                ) : !userApiKey ? (
-                  <>
-                    <span className="material-symbols-outlined">key_off</span>
-                    Missing API Key
-                  </>
+              <div className="mt-6">
+                {!userApiKey ? (
+                  <BottomSheetTooltip text="Please enter your API Key in settings first">
+                    <button
+                      onClick={handleScan}
+                      disabled={true}
+                      className="w-full bg-secondary text-white font-bold uppercase tracking-wider py-4 rounded-xl shadow-md hover:bg-primary-container transition-all opacity-50 flex items-center justify-center gap-2"
+                    >
+                      <span className="material-symbols-outlined">key_off</span>
+                      Missing API Key
+                    </button>
+                  </BottomSheetTooltip>
                 ) : (
-                  <>
-                    <span className="material-symbols-outlined group-hover:scale-110 transition-transform">document_scanner</span>
-                    Scan with Quartermaster AI
-                  </>
+                  <button
+                    onClick={handleScan}
+                    disabled={loading}
+                    className="w-full bg-secondary text-white font-bold uppercase tracking-wider py-4 rounded-xl shadow-md hover:bg-primary-container hover:-translate-y-1 transition-all disabled:opacity-50 disabled:transform-none flex items-center justify-center gap-2 group"
+                  >
+                    {loading ? (
+                      <>
+                        <span className="material-symbols-outlined animate-spin">sync</span>
+                        Deciphering Ink...
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined group-hover:scale-110 transition-transform">document_scanner</span>
+                        Scan with Quartermaster AI
+                      </>
+                    )}
+                  </button>
                 )}
-              </button>
+              </div>
             )}
 
             {errorMsg && (

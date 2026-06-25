@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 import { supabase } from '@/lib/supabase/client';
 
 export default function SignupPage() {
@@ -236,9 +237,11 @@ export default function SignupPage() {
         </div>
 
         {/* Parrot Image */}
-        <div className="w-40 h-40 relative flex-shrink-0 rounded-full border-4 border-[#5CDDB5] border-dashed overflow-hidden bg-white shadow-[0_0_30px_rgba(92,221,181,0.3)] pointer-events-auto hover:scale-110 hover:rotate-6 transition-all duration-300 cursor-help" title="Polly the Quartermaster">
-          <img src="/pirate_parrot.png" alt="Pirate Parrot" className="w-full h-full object-cover transform scale-125 translate-y-2" />
-        </div>
+        <BottomSheetTooltip text="Polly the Quartermaster">
+          <div className="w-40 h-40 relative flex-shrink-0 rounded-full border-4 border-[#5CDDB5] border-dashed overflow-hidden bg-white shadow-[0_0_30px_rgba(92,221,181,0.3)] pointer-events-auto hover:scale-110 hover:rotate-6 transition-all duration-300 cursor-help">
+            <img src="/pirate_parrot.png" alt="Pirate Parrot" className="w-full h-full object-cover transform scale-125 translate-y-2" />
+          </div>
+        </BottomSheetTooltip>
       </div>
     </div>
   );

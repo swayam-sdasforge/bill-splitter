@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 import Link from 'next/link';
 
 type Group = {
@@ -347,14 +348,17 @@ export default function GroupsPage() {
             ) : (
               groups.map((group, index) => (
                 <div key={group.id} className="bg-surface border-2 border-outline-variant/40 rounded-xl overflow-hidden flex flex-col hover:shadow-md hover:border-secondary/50 transition-all group relative">
-                  <button
-                    onClick={() => handleDelete(group.id)}
-                    className="absolute top-2 right-2 text-error opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-error/10 rounded-full z-20"
-                    title="Delete charter"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">delete</span>
-                  </button>
+                  <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <BottomSheetTooltip text="Delete charter">
+                      <button
+                        onClick={() => handleDelete(group.id)}
+                        className="text-error p-2 hover:bg-error/10 rounded-full"
+                        type="button"
+                      >
+                        <span className="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </BottomSheetTooltip>
+                  </div>
 
                   <div className="bg-surface-container-highest p-4 border-b border-dashed border-outline-variant">
                     <div className="flex items-center gap-2 mb-1">

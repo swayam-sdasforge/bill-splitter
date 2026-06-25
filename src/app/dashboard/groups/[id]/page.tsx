@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import ExpenseComments from './ExpenseComments';
 import SavingsVault from './SavingsVault';
+import BottomSheetTooltip from '@/components/ui/BottomSheetTooltip';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -488,27 +489,32 @@ export default function VoyageLedgerPage() {
             </span>
             <div className="flex items-center gap-2">
               <code className="font-mono text-xs text-primary font-bold tracking-wider select-all">{groupId}</code>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(groupId as string);
-                  alert("Invite Code copied to clipboard!");
-                }}
-                className="text-on-surface-variant hover:text-secondary transition-colors p-1 rounded-full hover:bg-surface-container-high"
-                title="Copy Invite Code"
-              >
-                <span className="material-symbols-outlined text-[16px]">content_copy</span>
-              </button>
+              <BottomSheetTooltip text="Copy Invite Code">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(groupId as string);
+                    alert("Invite Code copied to clipboard!");
+                  }}
+                  className="text-on-surface-variant hover:text-secondary transition-colors p-1 rounded-full hover:bg-surface-container-high"
+                >
+                  <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                </button>
+              </BottomSheetTooltip>
             </div>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
-            <Link href={`/dashboard/groups/${groupId}/kraken`} title="Spin the cursed wheel to decide who pays the next toll or walks the plank!" className="flex-1 sm:flex-none flex items-center justify-center gap-2 mt-4 ml-0 bg-error/10 text-error px-4 py-3 rounded-lg border border-error/30 hover:bg-error hover:text-on-error transition-all font-bold font-mono text-xs uppercase tracking-widest shadow-sm">
-              <span className="material-symbols-outlined text-[16px]">casino</span>
-              The Kraken's Wheel
-            </Link>
-            <Link href={`/dashboard/groups/${groupId}/map`} title="View the Treasure Map analytics for this voyage!" className="flex-1 sm:flex-none flex items-center justify-center gap-2 mt-4 ml-0 bg-secondary-container/20 text-secondary px-4 py-3 rounded-lg border border-secondary/30 hover:bg-secondary-container hover:text-on-secondary-container transition-all font-bold font-mono text-xs uppercase tracking-widest shadow-sm">
-              <span className="material-symbols-outlined text-[16px]">map</span>
-              Treasure Map
-            </Link>
+            <BottomSheetTooltip text="Spin the cursed wheel to decide who pays the next toll or walks the plank!">
+              <Link href={`/dashboard/groups/${groupId}/kraken`} className="flex-1 sm:flex-none flex items-center justify-center gap-2 mt-4 ml-0 bg-error/10 text-error px-4 py-3 rounded-lg border border-error/30 hover:bg-error hover:text-on-error transition-all font-bold font-mono text-xs uppercase tracking-widest shadow-sm">
+                <span className="material-symbols-outlined text-[16px]">casino</span>
+                The Kraken's Wheel
+              </Link>
+            </BottomSheetTooltip>
+            <BottomSheetTooltip text="View the Treasure Map analytics for this voyage!">
+              <Link href={`/dashboard/groups/${groupId}/map`} className="flex-1 sm:flex-none flex items-center justify-center gap-2 mt-4 ml-0 bg-secondary-container/20 text-secondary px-4 py-3 rounded-lg border border-secondary/30 hover:bg-secondary-container hover:text-on-secondary-container transition-all font-bold font-mono text-xs uppercase tracking-widest shadow-sm">
+                <span className="material-symbols-outlined text-[16px]">map</span>
+                Treasure Map
+              </Link>
+            </BottomSheetTooltip>
           </div>
         </div>
       </div>
@@ -612,14 +618,15 @@ export default function VoyageLedgerPage() {
                       {user.balance > 0 ? '+' : ''}{user.balance < 0 ? '-' : ''}₹{Math.abs(user.balance).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </p>
                     {user.isGuest && user.balance < -0.01 && guests[user.id]?.code && (
-                      <button 
-                        onClick={() => navigator.clipboard.writeText(`${window.location.origin}/pay/${guests[user.id].code}`)}
-                        className="text-[10px] uppercase font-mono tracking-wider bg-surface border border-outline-variant text-on-surface-variant px-2 py-1 rounded hover:bg-surface-container-high transition-colors flex items-center gap-1"
-                        title="Copy Smuggler's Link for this guest"
-                      >
-                        <span className="material-symbols-outlined text-[12px]">link</span>
-                        Smuggler's Link
-                      </button>
+                      <BottomSheetTooltip text="Copy Smuggler's Link for this guest">
+                        <button 
+                          onClick={() => navigator.clipboard.writeText(`${window.location.origin}/pay/${guests[user.id].code}`)}
+                          className="text-[10px] uppercase font-mono tracking-wider bg-surface border border-outline-variant text-on-surface-variant px-2 py-1 rounded hover:bg-surface-container-high transition-colors flex items-center gap-1"
+                        >
+                          <span className="material-symbols-outlined text-[12px]">link</span>
+                          Smuggler's Link
+                        </button>
+                      </BottomSheetTooltip>
                     )}
                   </div>
                 </div>
@@ -781,15 +788,19 @@ export default function VoyageLedgerPage() {
                       {expense.description}
                     </p>
                     {expense.split_type && expense.split_type !== 'equal' && (
-                      <span className="text-[10px] font-mono uppercase tracking-widest bg-secondary/10 text-secondary border border-secondary/20 px-1.5 py-0.5 rounded-sm flex items-center gap-1" title={`Custom Split: ${expense.split_type}`}>
-                        <span className="material-symbols-outlined text-[12px]">balance</span>
-                        {expense.split_type}
-                      </span>
+                      <BottomSheetTooltip text={`Custom Split: ${expense.split_type}`}>
+                        <span className="text-[10px] font-mono uppercase tracking-widest bg-secondary/10 text-secondary border border-secondary/20 px-1.5 py-0.5 rounded-sm flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[12px]">balance</span>
+                          {expense.split_type}
+                        </span>
+                      </BottomSheetTooltip>
                     )}
                     {expense.photo_url && (
-                      <button onClick={() => setShowGallery(true)} className="text-secondary hover:text-primary transition-colors flex items-center" title="View in Plunder Gallery">
-                        <span className="material-symbols-outlined text-[16px]">image</span>
-                      </button>
+                      <BottomSheetTooltip text="View in Plunder Gallery">
+                        <button onClick={() => setShowGallery(true)} className="text-secondary hover:text-primary transition-colors flex items-center">
+                          <span className="material-symbols-outlined text-[16px]">image</span>
+                        </button>
+                      </BottomSheetTooltip>
                     )}
                   </div>
                   <p className="text-xs text-on-surface-variant font-mono flex items-center gap-2 mt-0.5">
@@ -828,13 +839,14 @@ export default function VoyageLedgerPage() {
                         )}
                       </div>
                     ) : group?.status !== 'finished' && (
-                      <button 
-                        onClick={() => handleMutiny(expense.id, true)}
-                        title="Dispute this expense! It will be struck from the ledger and excluded from all final settlement math until the Captain resolves it."
-                        className="opacity-0 group-hover:opacity-100 text-[10px] text-error border border-error/50 px-2 py-0.5 rounded uppercase tracking-wider hover:bg-error hover:text-white transition-all"
-                      >
-                        Mutiny
-                      </button>
+                      <BottomSheetTooltip text="Dispute this expense! It will be struck from the ledger and excluded from all final settlement math until the Captain resolves it.">
+                        <button 
+                          onClick={() => handleMutiny(expense.id, true)}
+                          className="opacity-0 group-hover:opacity-100 text-[10px] text-error border border-error/50 px-2 py-0.5 rounded uppercase tracking-wider hover:bg-error hover:text-white transition-all"
+                        >
+                          Mutiny
+                        </button>
+                      </BottomSheetTooltip>
                     )}
                   </div>
                 </div>
