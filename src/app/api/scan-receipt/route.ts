@@ -55,7 +55,7 @@ Return ONLY a valid JSON object matching the requested schema.`;
       }
     });
 
-    const text = response.text();
+    const text = response.text;
     if (!text) {
       throw new Error('No response from Gemini');
     }

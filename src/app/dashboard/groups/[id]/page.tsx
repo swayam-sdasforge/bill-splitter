@@ -32,6 +32,7 @@ type Group = {
   status?: string;
   created_by?: string;
   savings_goal?: number;
+  budget?: number;
 };
 
 export default function VoyageLedgerPage() {
@@ -658,7 +659,7 @@ export default function VoyageLedgerPage() {
                   {s.creditorId === userId && (
                     <div className="flex flex-col gap-2">
                       <button 
-                        onClick={() => handleParley(s.debtorId, s.debtorName, s.amount, !allMemberIds.includes(s.debtorId), true)}
+                        onClick={() => handleParley(s.debtorId, s.debtorName, s.amount, !members[s.debtorId], true)}
                         className="text-[10px] uppercase font-mono tracking-wider bg-secondary text-white px-3 py-1.5 rounded hover:bg-primary transition-colors flex items-center justify-center gap-1"
                       >
                         <span className="material-symbols-outlined text-[14px]">handshake</span>

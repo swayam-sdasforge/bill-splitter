@@ -147,7 +147,7 @@ export default function TreasureMapPage() {
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value: number) => `₹${value.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`}
+                    formatter={(value: any) => `₹${Number(value).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`}
                     contentStyle={{ backgroundColor: '#1A1820', border: '1px solid #4B3A5A', borderRadius: '8px', color: '#fff' }}
                     itemStyle={{ color: '#FCD34D', fontWeight: 'bold' }}
                   />
@@ -170,7 +170,7 @@ export default function TreasureMapPage() {
                   <YAxis dataKey="name" type="category" stroke="#A78BFA" fontSize={12} width={80} />
                   <Tooltip 
                     cursor={{fill: '#2D2A38'}}
-                    formatter={(value: number) => `₹${value.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`}
+                    formatter={(value: any) => `₹${Number(value).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`}
                     contentStyle={{ backgroundColor: '#1A1820', border: '1px solid #4B3A5A', borderRadius: '8px', color: '#fff' }}
                   />
                   <Bar dataKey="amount" fill="#F59E0B" radius={[0, 4, 4, 0]}>
