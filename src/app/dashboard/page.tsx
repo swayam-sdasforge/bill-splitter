@@ -508,7 +508,7 @@ export default function DashboardOverview() {
   };
 
   return (
-    <div className="bg-background text-on-background font-body-md min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
+    <div className="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row selection:bg-secondary-container selection:text-on-secondary-container">
       {/* TopAppBar (Mobile Only - Hidden on Desktop) */}
       <header className="flex justify-between items-center px-gutter w-full sticky top-0 z-50 overflow-hidden border-b-2 border-outline-variant bg-background dark:bg-surface-dim h-20 md:hidden">
         <div className="flex items-center gap-2">

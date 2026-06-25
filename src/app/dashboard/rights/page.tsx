@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function RightsPage() {
   return (
-    <div className="bg-background text-on-background font-body-md min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
+    <div className="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row selection:bg-secondary-container selection:text-on-secondary-container">
       {/* SideNavBar (Desktop Only) */}
       <nav 
         className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-72 border-r-2 border-double border-outline-variant bg-surface-container bg-cover bg-center shadow-[4px_0_15px_-3px_rgba(88,28,135,0.08)]"
