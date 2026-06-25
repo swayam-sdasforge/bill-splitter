@@ -613,16 +613,16 @@ export default function DashboardOverview() {
             Treasures to explore
             <span className="material-symbols-outlined text-[18px]">diamond</span>
           </Link>
-          <Link href="/dashboard/groups" className="w-full bg-primary-container text-on-primary border border-primary-container px-4 py-3 rounded text-center font-label-sm text-label-sm hover:bg-primary transition-colors flex items-center justify-center gap-2 ticket-btn shadow-sm relative overflow-hidden block">
-            <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-container rounded-full border-r border-primary-container"></div>
-            <div className="flex-1 flex items-center justify-center gap-2">
+          <Link href="/dashboard/groups" className="w-full bg-[#d32f2f] dark:bg-[#b71c1c] text-white border border-[#b71c1c] dark:border-[#7f0000] px-4 py-3 rounded text-center font-label-sm text-label-sm hover:bg-[#c62828] dark:hover:bg-[#c62828] transition-colors flex items-center justify-center gap-2 ticket-btn shadow-sm relative overflow-hidden block">
+            <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-container rounded-full border-r border-[#b71c1c] dark:border-[#7f0000]"></div>
+            <div className="flex-1 flex items-center justify-center gap-2 font-mono font-bold tracking-widest uppercase">
               <span className="material-symbols-outlined text-[18px]">add</span>New Voyage
             </div>
-            <div className="h-full border-l border-dashed border-on-primary/30 mx-2"></div>
+            <div className="h-full border-l border-dashed border-white/40 mx-2"></div>
             <div className="w-8 flex items-center justify-center">
-              <span className="material-symbols-outlined text-[16px] opacity-70">confirmation_number</span>
+              <span className="material-symbols-outlined text-[16px] opacity-90 transform -rotate-45">confirmation_number</span>
             </div>
-            <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-container rounded-full border-l border-primary-container"></div>
+            <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-surface-container rounded-full border-l border-[#b71c1c] dark:border-[#7f0000]"></div>
           </Link>
         </div>
         <div className="p-container-margin border-t border-outline-variant border-dashed">
